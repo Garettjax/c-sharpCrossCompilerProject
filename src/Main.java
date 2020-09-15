@@ -176,9 +176,11 @@ public class Main {
 					itr.remove();
 				}
 				
-			//TODO: I think this was the actual execution
-			//Parser parser = new Parser(tokens);
-			//parser.parse(parser);
+			//TODO: Translate this to Java and output source code (I'm not sure why we need to do this)
+				
+			//TODO: Syntax Checking and error handling
+				
+			//TODO: Execute this C# that we have turned into tokens
 			}
 			for (Token element : tokens) {
 				//if(element.getLexeme() != null) {
