@@ -1,5 +1,6 @@
 public class Token
 {
+
 	private String lex;
 	private String tokenType;
 
@@ -49,6 +50,4 @@ public class Token
 	{
 		return columnNum;
 	}
-
-
 }
