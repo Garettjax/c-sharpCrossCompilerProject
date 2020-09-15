@@ -4,7 +4,7 @@ public class CustomParser {
 	
 	String text = "";
 	int position = 0;
-	int currentLine = 0;
+	int currentLine = 1;
 	char lastChar = '\0';
 	char currentChar = '\0';
 	char nextChar = '\0';
@@ -14,7 +14,7 @@ public class CustomParser {
 	CustomParser(String text) {
 		this.text = text;
 		this.position = -1;
-		this.currentLine = 0;
+		this.currentLine = 1;
 		this.lastChar = '\0';
 		this.currentChar = 's';
 		this.nextChar = '\0';
@@ -29,7 +29,7 @@ public class CustomParser {
 		tokens = new ArrayList<Token>();
 		
 		//This is for the very first character in input stream
-		if(self.currentLine == 0) {
+		if(self.currentLine == 1) {
 			moveForward(self);
 		}
 		
@@ -79,6 +79,18 @@ public class CustomParser {
 				case ',':
 					tokens.add(new Token(",", "COMMA", self.currentLine));
 					//tokens.add("Comma, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+					break;
+				case ';':
+					tokens.add(new Token(";", "SEMICOLON", self.currentLine));
+					//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+					break;
+				case '{':
+					tokens.add(new Token("{", "LEFT_CURLY", self.currentLine));
+					//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+					break;
+				case '}':
+					tokens.add(new Token("}", "RIGHT_CURLY", self.currentLine));
+					//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 					break;
 				}
 				
@@ -230,57 +242,31 @@ public class CustomParser {
 	//Check reserved words list
 	public boolean isReservedWord(String value) {
 		boolean reserved = false;
-		
+
 		ArrayList<String> reservedWordsList = new ArrayList<String>();
-		reservedWordsList.add("import");
-		reservedWordsList.add("symbol");
-		reservedWordsList.add("forward");
-		reservedWordsList.add("specifications");
-		reservedWordsList.add("references");
-		reservedWordsList.add("function");
-		reservedWordsList.add("declarations");
-		reservedWordsList.add("implementations");
-		reservedWordsList.add("main");
-		reservedWordsList.add("parameters");
+		reservedWordsList.add("using");
+		reservedWordsList.add("System");
+		reservedWordsList.add("namespace");
+		reservedWordsList.add("internal");
+		reservedWordsList.add("class");
+		reservedWordsList.add("public");
+		reservedWordsList.add("static");
+		reservedWordsList.add("void");
+		reservedWordsList.add("Main");
+		reservedWordsList.add("string");
 		reservedWordsList.add("constant");
 		reservedWordsList.add("begin");
-		reservedWordsList.add("endfun");
 		reservedWordsList.add("if");
-		reservedWordsList.add("then");
 		reservedWordsList.add("else");
-		reservedWordsList.add("endif");
-		reservedWordsList.add("repeat");
+		reservedWordsList.add("elseIf");
 		reservedWordsList.add("until");
-		reservedWordsList.add("endrepeat");
-		reservedWordsList.add("display");
-		reservedWordsList.add("input");
-		reservedWordsList.add("not");
-		reservedWordsList.add("greater");
-		reservedWordsList.add("or");
-		reservedWordsList.add("equal");
-		reservedWordsList.add("set");
 		reservedWordsList.add("return");
-		reservedWordsList.add("define");
-		reservedWordsList.add("of");
-		reservedWordsList.add("type");
-		reservedWordsList.add("array");
-		reservedWordsList.add("struct");
-		reservedWordsList.add("integer");
-		reservedWordsList.add("short");
-		reservedWordsList.add("enum");
+		reservedWordsList.add("int");
 		reservedWordsList.add("double");
-		reservedWordsList.add("variables");
-		reservedWordsList.add("endwhile");
 		reservedWordsList.add("while");
-		reservedWordsList.add("symbol");
+		reservedWordsList.add("do");
 		reservedWordsList.add("global");
-		reservedWordsList.add("constants");
-		reservedWordsList.add("byte");
 		reservedWordsList.add("for");
-		reservedWordsList.add("endfor");
-		reservedWordsList.add("exit");
-		reservedWordsList.add("is");
-		reservedWordsList.add("increment");
 		
 		if(reservedWordsList.contains(value)) {
 			reserved = true;
@@ -291,13 +277,14 @@ public class CustomParser {
 		return reserved;
 	}
 	public Token addReservedWord(String value) {
+		value = value.toLowerCase();
 		if(value.equalsIgnoreCase("NOT") ||
 				value.equalsIgnoreCase("GREATER") ||
 				value.equalsIgnoreCase("OR") ||
 				value.equalsIgnoreCase("EQUAL")) {
 			return new Token(value, "RELATIONAL_OP", this.currentLine);
 		}
-		return new Token(value, value.toUpperCase(), this.currentLine);
+		return new Token(value, "KEYWORD", this.currentLine);
 	}
 	
 	//Check if character is a special symbol
@@ -313,6 +300,9 @@ public class CustomParser {
 		symbolList.add(')');
 		symbolList.add('[');
 		symbolList.add(']');
+		symbolList.add(';');
+		symbolList.add('{');
+		symbolList.add('}');
 		
 		if(symbolList.contains(ch)) {
 			isSymbol = true;

@@ -145,14 +145,14 @@ import java.util.Iterator;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		//System.out.println("Input path to SCL file: ");
+		//System.out.println("Please provide a valid path to input.txt file: ");
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		String text = "", line = "";
 		
 		try {
 			//String path = bufferedReader.readLine();
 			bufferedReader.close();
-			//String path = "C:\\Users\\bklog\\Desktop\\Mods\\School\\Current\\CPL\\Project\\welcome.scl";
+			//TODO find a way to get the project's relative path for this file
 			String path = "C:\\Users\\Brett\\eclipse-workspace\\c-sharpCrossCompilerProject\\bin\\input.txt";
 			
 			File file = new File(path);

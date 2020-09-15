@@ -3,6 +3,7 @@ namespace Loops
 {
     internal class Program
     {
+    	//test comment
         public static void Main(string[] args)
         {
             int test1 = 1;
@@ -22,8 +23,8 @@ namespace Loops
                 test3++;
             } while (test3 < 20);
             
-            for(int i = 2; i < 3; i++) 
-            for(int j = 1; j < i; j++) 
+            for(int i = 2; i < 3; i++)
+            for(int j = 1; j < i; j++)
                 Console.WriteLine("Test 4 Passed if prints once"); 
         } 
     }
