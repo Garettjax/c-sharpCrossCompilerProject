@@ -1,9 +1,6 @@
 //TODO: issues to address Relational Operators, especially 2 char ones, we arent supporting objects so make "Console.WriteLine" as one thing
-
 import java.util.ArrayList;
-
 public class CustomParser {
-	
 	String text;
 	int position;
 	int currentLine;
@@ -51,19 +48,10 @@ public class CustomParser {
 							//case	GT_OPERATOR:
 							// EQ_OPERATOR(''
 							// NE_OPERATOR(''
-
-
 							//TODO: check if its possible to use "lex" from enum cuz it is there.... will look into it in a while
 							//Done
-
 							case ASSIG://TODO: confirm if this is not a token? aka "="
-
-
-
-
-
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()) , "ASSIGN_OP", self.currentLine));
-
 								//tokens.add("Left paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
 							case MINUS:
@@ -131,15 +119,8 @@ public class CustomParser {
 				self.moveForward(self);
 			}
 
-
-
-
-
 			//Let's now check for stringLiteral's
 			token = stringLiteral(self);
-
-
-
 			//If we got one we add it, if not move on
 			//TODO: get what? give an example perhaps?
 			if (token.getLexeme() != "") {
