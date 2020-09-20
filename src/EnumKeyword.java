@@ -8,7 +8,28 @@ public enum EnumKeyword {
     WHILE("while"),
     ELSE("else"),
     PRINT("print"),
-    FUNCTION("function");
+    PUBLIC("public"),
+    FUNCTION("function"),
+    USING("using"),
+	SYSTEM("System"),
+	NAMESPACE("namespace"),
+	INTERNAL("internal"),
+	CLASS("class"),
+	STATIC("static"),
+	VOID("void"),
+	MAIN("Main"),
+	STRING("string"),
+	CONSTANT("constant"),
+	BEGIN("begin"),
+	ELSEIF("elseIf"),
+	UNTIL("until"),
+	RETURN("return"),
+	INT("int"),
+	DOUBLE("double"),
+	DO("do"),
+	GLOBAL("global");
+
+
 
     private   String c;
 
@@ -19,5 +40,6 @@ public enum EnumKeyword {
     public String getString() {
         return c;
     }
+
 }
 
