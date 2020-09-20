@@ -1,18 +1,15 @@
 //TODO: issues to address Relational Operators, especially 2 char ones, we arent supporting objects so make "Console.WriteLine" as one thing
 
-
-
-
 import java.util.ArrayList;
 
 public class CustomParser {
 	
-	String text = "";
-	int position = 0;
-	int currentLine = 1;
-	char lastChar = '\0';
-	char currentChar = '\0';
-	char nextChar = '\0';
+	String text;
+	int position;
+	int currentLine;
+	char lastChar;
+	char currentChar;
+	char nextChar;
 	ArrayList<Token> tokens;
 	
 	//Constructor
@@ -31,7 +28,7 @@ public class CustomParser {
 		//Declare/instantiate variables
 		Token token;
 		String tempToken = "";
-		tokens = new ArrayList<Token>();
+		tokens = new ArrayList<>();
 		
 		//This is for the very first character in input stream
 		if(self.currentLine == 1) {
@@ -286,10 +283,11 @@ public class CustomParser {
 		boolean reserved = false;
 
 		for (EnumKeyword m : EnumKeyword.values()) {
-			if(m.getString().equals(value)){
+			if (m.getString().equals(value)) {
 				reserved = true;
 				//System.out.println("Enum:  " + m.getString());
 				//System.out.println("Value: " + value);
+				break;
 			}
 		}
 		//reserved is always false UNLESS above if statement is true
@@ -322,17 +320,13 @@ public class CustomParser {
 				isSymbol = true;
 				//System.out.println("Enum:  " + n.getCharacters());
 				//System.out.println("Value: " + ch);
+				break;
 			}
 		}
 		return isSymbol;
 	}
 	//Check if end of file
 	public boolean endOfFile(CustomParser self) {
-		if(self.currentChar == '\0') {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return self.currentChar == '\0';
 	}
 }
