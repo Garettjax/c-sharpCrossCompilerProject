@@ -13,8 +13,8 @@ public class Main {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 		//System.out.println("Please provide a valid path to input.txt file: ");
-		ArrayList<Token> tokens;
-		String text = "", line;
+		ArrayList<Token> tokens = new ArrayList<Token>();
+		String text = "", line = "";
 		
 		try {
 			//String path = bufferedReader.readLine();
@@ -27,7 +27,7 @@ public class Main {
 
 			File file = new File(path);
 			bufferedReader = new BufferedReader(new FileReader(path));
-			//System.out.println(path);
+			System.out.println(path);
 
 			
 			while ((line = bufferedReader.readLine()) != null) {
@@ -39,8 +39,6 @@ public class Main {
 			
 			tokens = customParser.getAllTokens(customParser);
 
-			//removed loop with Collection.removeIf
-/*
 			Iterator<Token> itr = tokens.iterator();
 			while(itr.hasNext()) {
 				Token next = itr.next();
@@ -52,13 +50,12 @@ public class Main {
 			//Parser parser = new Parser(tokens);
 			//parser.parse(parser);
 			}
-			*/
 			for (Token element : tokens) {
 				//if(element.getLexeme() != null) {
 					System.out.println("\n******************************");
 					System.out.println(element.getLexeme());
 					System.out.println(element.getTokenType());
-					System.out.println("				Line: "+element.getRowNumber());
+					System.out.println(element.getRowNumber());
 					System.out.println("******************************\n");
 				//}
 			}
