@@ -27,7 +27,7 @@ public class Main {
 
 			File file = new File(path);
 			bufferedReader = new BufferedReader(new FileReader(path));
-			System.out.println(path);
+			//System.out.println(path);
 
 			
 			while ((line = bufferedReader.readLine()) != null) {
