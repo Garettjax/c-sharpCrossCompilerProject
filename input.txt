@@ -1,4 +1,4 @@
-using System;
+//using System;
 namespace Loops
 {
     internal class Program
@@ -22,9 +22,7 @@ namespace Loops
                 test3++;
             } while (test3 < 20);
             
-            for(int i = 2; i < 3; i++) 
-            for(int j = 1; j < i; j++) 
-                Console.WriteLine("Test 4 Passed if prints once"); 
+            Console.WriteLine("Test 4 Passed if prints once"); 
         } 
     }
 }

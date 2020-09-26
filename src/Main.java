@@ -23,7 +23,7 @@ public class Main {
 			//Note: It automatically does in IntelliJ, so it might be IDE based problem?
 			//Use one or the other
 			String path = ("input.txt");
-			//	String path = "C:\\Users\\Brett\\eclipse-workspace\\c-sharpCrossCompilerProject\\bin\\input.txt";
+			//String path = "C:\\Users\\Brett\\eclipse-workspace\\c-sharpCrossCompilerProject\\bin\\input.txt";
 
 			File file = new File(path);
 			bufferedReader = new BufferedReader(new FileReader(path));
@@ -45,16 +45,13 @@ public class Main {
 				if(next.getRowNumber() == -1) {
 					itr.remove();
 				}
-
-			//TODO: I think this was the actual execution
-			//Parser parser = new Parser(tokens);
-			//parser.parse(parser);
-			
 			}
+			
 			Translation translation = new Translation();
 			tokens = Translation.TranslateTokensToJava(tokens);
 			
 			for (Token element : tokens) {
+				int currentLine = element.getRowNumber();
 				//if(element.getLexeme() != null) {
 					System.out.println("\n******************************");
 					System.out.println(element.getLexeme());

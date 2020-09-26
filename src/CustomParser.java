@@ -1,5 +1,6 @@
 //TODO: issues to address Relational Operators, especially 2 char ones, we arent supporting objects so make "Console.WriteLine" as one thing
 import java.util.ArrayList;
+
 public class CustomParser {
 	String text;
 	int position;
