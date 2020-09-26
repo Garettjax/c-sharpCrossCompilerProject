@@ -49,7 +49,11 @@ public class Main {
 			//TODO: I think this was the actual execution
 			//Parser parser = new Parser(tokens);
 			//parser.parse(parser);
+			
 			}
+			Translation translation = new Translation();
+			tokens = Translation.TranslateTokensToJava(tokens);
+			
 			for (Token element : tokens) {
 				//if(element.getLexeme() != null) {
 					System.out.println("\n******************************");
