@@ -359,3 +359,5 @@ public class CustomParser {
 		return self.currentChar == '\0';
 	}
 }
+
+

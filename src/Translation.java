@@ -10,7 +10,7 @@ public class Translation {
 		HashMap<String, String> cToJavaKeywords = new HashMap<String, String>();
 		cToJavaKeywords.put("using", "import");
 		cToJavaKeywords.put("internal", "protected");
-
+		cToJavaKeywords.put("Console.WriteLine", "System.out.println");
 
 	    for (Token t : cSharpTokens) {
 	        if(cToJavaKeywords.containsKey(t.getLexeme())) {
