@@ -4,7 +4,7 @@ namespace Loops
     {
         public static void Main(string[] args)
         {
-            int test1 = 1;
+            int test1 == 1;
             while (test1 <= 4)
             {
                 Console.WriteLine("Test 1 Passed (prints 4 times)");

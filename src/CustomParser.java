@@ -1,4 +1,4 @@
-//TODO: issues to address Relational Operators, especially 2 char ones, we arent supporting objects so make "Console.WriteLine" as one thing
+
 import java.util.ArrayList;
 
 public class CustomParser {
@@ -46,15 +46,24 @@ public class CustomParser {
 				for (EnumToken EnumTokenType : EnumToken.values()) {
 					if (EnumTokenType.getChar() == (self.currentChar)) {
 						switch (EnumTokenType) {
-							//  LE_OPERATOR(''
-							//LT_OPERATOR('
-							// GE_OPERATOR(''
-							//case	GT_OPERATOR:
-							// EQ_OPERATOR(''
-							// NE_OPERATOR(''
+
+							//TODO: Ask brett if we want to change this to String cuz of "==" or "!=" etc
+							//TODO: for now i have commented them out
+
+
+
 							//TODO: check if its possible to use "lex" from enum cuz it is there.... will look into it in a while
 							//Done
 							case ASSIG://TODO: confirm if this is not a token? aka "="
+								//TODO: Make it so it makes ONE token for "=="
+								//done
+								if (EnumTokenType.getChar() == (self.nextChar)) {
+									//	System.out.println("current "+ self.currentChar);
+									//	System.out.println("next "+ self.nextChar);
+									//	System.out.println(currentLine);
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "EQUAL_TO", self.currentLine));
+									self.moveForward(self);
+								}else
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()) , "ASSIGN_OP", self.currentLine));
 								//tokens.add("Left paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
@@ -67,11 +76,13 @@ public class CustomParser {
 								//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
 							case MINUS:
+								//TODO: Make it so it makes ONE token for "--"
+								//done
 								if (EnumTokenType.getChar() == (self.nextChar)) {
 								//	System.out.println("current "+ self.currentChar);
 								//	System.out.println("next "+ self.nextChar);
 								//	System.out.println(currentLine);
-									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "SUBTRACTION_SUBTRACTION_OP", self.currentLine));
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "DEC_OP", self.currentLine));
 									self.moveForward(self);
 								}else
 								tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "SUBTRACTION_OP", self.currentLine));
@@ -88,11 +99,13 @@ public class CustomParser {
 								//tokens.add("Division Op, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
 							case PLUS:
+								//TODO: Make it so it makes ONE token for "++"
+								//done
 								if (EnumTokenType.getChar() == (self.nextChar)) {
 								//	System.out.println("current "+ self.currentChar);
 								//	System.out.println("next "+ self.nextChar);
 								//	System.out.println(currentLine);
-									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "PLUS_PLUS_OP", self.currentLine));
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "INC_OP", self.currentLine));
 									self.moveForward(self);
 								}else
 
@@ -114,6 +127,8 @@ public class CustomParser {
 								//tokens.add("Left paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
 							case GT_OPERATOR:
+								//TODO: Make it so it makes ONE token for ">="
+								//done
 								if ((EnumToken.ASSIG.getChar())==(self.nextChar)){
 								//	System.out.println("current "+ self.currentChar);
 								//	System.out.println("next "+ self.nextChar);
@@ -125,7 +140,10 @@ public class CustomParser {
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "GT_OPERATOR", self.currentLine));
 
 								break;
+
 							case LT_OPERATOR:
+								//TODO: Make it so it makes ONE token for "<="
+								//done
 								if ((EnumToken.ASSIG.getChar())==(self.nextChar)){
 								//	System.out.println("current "+ self.currentChar);
 								//	System.out.println("next "+ self.nextChar);
@@ -170,6 +188,8 @@ public class CustomParser {
 			token = stringLiteral(self);
 			//If we got one we add it, if not move on
 			//TODO: get what? give an example perhaps?
+			//Not sure....
+			//TODO: Remove it for code cleanup and see...if anything breaks
 			if (token.getLexeme() != "") {
 				tokens.add(token);
 				//token = "";
@@ -323,6 +343,8 @@ public class CustomParser {
 		return reserved;
 	}
 	//TODO: why was this made? ?
+	//TODO: remove but it is used above so check if it breaks anything... will do later during code cleanup
+
 	public Token addReservedWord(String value) {
 		value = value.toLowerCase();
 		if(value.equalsIgnoreCase("NOT") ||
@@ -336,8 +358,6 @@ public class CustomParser {
 
 	//Check if character is a special symbol
 
-	//TODO: Ask brett if we want to change this to String cuz of "==" or "!=" etc
-	//TODO: for now i have commented them out
 
 	public boolean containsSymbol(char ch) {
 		//TODO: make sure it uses ENUMToken
@@ -359,5 +379,9 @@ public class CustomParser {
 		return self.currentChar == '\0';
 	}
 }
+
+
+//TODO: Are we supporting postfix/prefix? ++ and -- should be able to work...
+//TODO: make a token for != and make sur it errors out if its just ! ...or let it go through the switch statement.. thatll work too..
 
 
