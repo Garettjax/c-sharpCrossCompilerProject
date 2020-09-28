@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,10 +10,24 @@ import java.util.Iterator;
 
 
 public class Main {
+	public static String textBoxInfo;
+	public static ArrayList<Token> tokens = new ArrayList<Token>();
 
 	// create hash map
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
+
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				MyAssignment myAssignment = new MyAssignment();
+				myAssignment.setVisible(true);
+			}
+		});
+
+
 		boolean showTokens =true;
 		boolean showJavaCode =false;
 
@@ -20,7 +35,7 @@ public class Main {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 		//System.out.println("Please provide a valid path to input.txt file: ");
-		ArrayList<Token> tokens = new ArrayList<Token>();
+		//ArrayList<Token> tokens = new ArrayList<Token>();
 		String text = "", line = "";
 		
 		try {
@@ -30,6 +45,7 @@ public class Main {
 			//Done
 			String path = ("input.txt");
 			File file = new File(path);
+
 			bufferedReader = new BufferedReader(new FileReader(path));
 			//System.out.println(path);
 			while ((line = bufferedReader.readLine()) != null) {
@@ -63,6 +79,8 @@ if(showTokens) {
 	}
 }
 //For translation
+
+			//make it show <= and in future !=
 			if (showJavaCode){
 
 				int temp = 0;
