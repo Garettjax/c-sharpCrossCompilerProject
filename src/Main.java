@@ -5,10 +5,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
 public class Main {
+
+	// create hash map
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,8 +35,15 @@ public class Main {
 
 			
 			while ((line = bufferedReader.readLine()) != null) {
+
 				text += line + '\n';
+
+
 			}
+
+
+
+
 			bufferedReader.close();
 			
 			CustomParser customParser = new CustomParser(text);
@@ -46,19 +57,85 @@ public class Main {
 					itr.remove();
 				}
 			}
-			
+
+
+		//	System.out.println(temp);
+
+
+			/*
+			int temp =2;
+			int	temp1;
+			for(Token element1 : tokens) {
+
+			//	System.out.println(element1.rowNum);
+				if(element1.rowNum == temp){
+					System.out.print(element1.getLexeme());
+				}
+				System.out.println();
+
+
+				temp1= element1.rowNum;
+				System.out.println(temp +" "+ element1.rowNum);
+				if(element1.rowNum!=temp1){
+
+
+				}
+				temp++;
+			//	temp = element1.rowNum;*/
+
+			//	if(temp == element1.rowNum){
+
+
+
+			//	}
+			//	System.out.println(element1.getLexeme());
+
+
+
+			//		for(int i =element1.rowNum; ){
+
+
+		//			}
+
+					//	for (Token element : tokens) {
+
+					//		int currentLine = element1.getRowNumber();
+							//if(element.getLexeme() != null) {
+
+					//		System.out.print(element1.getLexeme());
+
+							//	System.out.println(element.getTokenType());
+							//	System.out.println(element.getRowNumber());
+
+							//}
+					//	}
+
+		//		System.out.println();
+
 			Translation translation = new Translation();
 			tokens = Translation.TranslateTokensToJava(tokens);
-			
-			for (Token element : tokens) {
-				int currentLine = element.getRowNumber();
-				//if(element.getLexeme() != null) {
-					System.out.println("\n******************************");
-					System.out.println(element.getLexeme());
-					System.out.println(element.getTokenType());
-					System.out.println(element.getRowNumber());
-					System.out.println("******************************\n");
-				//}
+
+			int temp2=0;
+			for (Token element1 : tokens) {
+
+				if(temp2!= element1.rowNum){
+					System.out.println();
+
+				}
+				if((!element1.getLexeme().equals("-"))&&(!element1.getLexeme().equals("+"))){
+
+
+					System.out.print(element1.getLexeme() + " ");
+				}
+				else{
+					System.out.print(element1.getLexeme() + element1.getLexeme());
+
+				}
+
+				//	System.out.print(element1.rowNum);
+				temp2= element1.rowNum;
+				//		System.out.println(element1.rowNum);
+
 			}
 			
 		}

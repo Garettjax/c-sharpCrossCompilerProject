@@ -9,7 +9,8 @@ public class CustomParser {
 	char currentChar;
 	char nextChar;
 	ArrayList<Token> tokens;
-	
+
+
 	//Constructor
 	CustomParser(String text) {
 		this.text = text;
@@ -18,7 +19,9 @@ public class CustomParser {
 		this.lastChar = '\0';
 		this.currentChar = 's';
 		this.nextChar = '\0';
+
 	}
+
 	/* Returns and arrayList of tokens, each token is a string containing
 	 * the token type, token value, and line number for the token
 	 */
@@ -27,14 +30,14 @@ public class CustomParser {
 		Token token;
 		String tempToken = "";
 		tokens = new ArrayList<>();
-		
+
 		//This is for the very first character in input stream
 		if(self.currentLine == 1) {
 			moveForward(self);
 		}
 		//Keep going till the end of the file
 		while(!self.endOfFile(self)) {
-			//self explanatory functions 
+			//self explanatory functions
 			removeComments(self);
 			removeWhitespace(self);
 			//If current character is a symbol then it's a token
@@ -55,9 +58,26 @@ public class CustomParser {
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()) , "ASSIGN_OP", self.currentLine));
 								//tokens.add("Left paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
+							case CURLY_BRACKET_OPEN:
+								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "LEFT_CURLY", self.currentLine));
+								//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+								break;
+							case CURLY_BRACKET_CLOSE:
+								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "RIGHT_CURLY", self.currentLine));
+								//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+								break;
 							case MINUS:
-								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "SUBTRACTION_OP", self.currentLine));
+								if (EnumTokenType.getChar() == (self.nextChar)) {
+								//	System.out.println("current "+ self.currentChar);
+								//	System.out.println("next "+ self.nextChar);
+								//	System.out.println(currentLine);
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "SUBTRACTION_SUBTRACTION_OP", self.currentLine));
+									self.moveForward(self);
+								}else
+								tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "SUBTRACTION_OP", self.currentLine));
 								//tokens.add("Subtraction Op, symbol: " + self.currentChar + ", Line #" + self.currentLine);
+
+
 								break;
 							case MULTIPLY:
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "MULTIPLICATION_OP", self.currentLine));
@@ -68,6 +88,14 @@ public class CustomParser {
 								//tokens.add("Division Op, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
 							case PLUS:
+								if (EnumTokenType.getChar() == (self.nextChar)) {
+								//	System.out.println("current "+ self.currentChar);
+								//	System.out.println("next "+ self.nextChar);
+								//	System.out.println(currentLine);
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "PLUS_PLUS_OP", self.currentLine));
+									self.moveForward(self);
+								}else
+
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "ADDITION_OP", self.currentLine));
 								//tokens.add("Addition, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
@@ -85,7 +113,29 @@ public class CustomParser {
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "LEFT_PAREN", self.currentLine));
 								//tokens.add("Left paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
+							case GT_OPERATOR:
+								if ((EnumToken.ASSIG.getChar())==(self.nextChar)){
+								//	System.out.println("current "+ self.currentChar);
+								//	System.out.println("next "+ self.nextChar);
+								//	System.out.println(currentLine);
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "GT_E_OPERATOR", self.currentLine));
+									self.moveForward(self);
+								}else
 
+								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "GT_OPERATOR", self.currentLine));
+
+								break;
+							case LT_OPERATOR:
+								if ((EnumToken.ASSIG.getChar())==(self.nextChar)){
+								//	System.out.println("current "+ self.currentChar);
+								//	System.out.println("next "+ self.nextChar);
+								//	System.out.println(currentLine);
+									tokens.add(new Token((Character.toString(EnumTokenType.getChar())), "LT_E_OPERATOR", self.currentLine));
+									self.moveForward(self);
+								}else
+								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "LT_OPERATOR", self.currentLine));
+
+							break;
 							case CLOSE_BRACKET:
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "RIGHT_PAREN", self.currentLine));
 								//tokens.add("Right paren, symbol: " + self.currentChar + ", Line #" + self.currentLine);
@@ -106,15 +156,11 @@ public class CustomParser {
 								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "RIGHT_BRACKET", self.currentLine));
 								//tokens.add("Right bracket, symbol: " + self.currentChar + ", Line #" + self.currentLine);
 								break;
-							case CURLY_BRACKET_OPEN:
-								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "LEFT_CURLY", self.currentLine));
-								//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
-								break;
-							case CURLY_BRACKET_CLOSE:
-								tokens.add(new Token(Character.toString(EnumTokenType.getChar()), "RIGHT_CURLY", self.currentLine));
-								//tokens.add("Semicolon, symbol: " + self.currentChar + ", Line #" + self.currentLine);
-								break;
+
+
+
 						}
+
 					}
 				}
 				self.moveForward(self);
@@ -169,14 +215,15 @@ public class CustomParser {
 					tokens.add(new Token(tempToken, "IDENTIFIER", self.currentLine));
 					//tokens.add("Identifier, symbol: " + token + ", Line #" + self.currentLine);
 				}
-				
+
 				tempToken = "";
 			}
 		}
+
 		tokens.add(new Token("End of File", "EOF", self.currentLine));
 		return tokens;
 	}
-	
+
 	//Ignore whitespace
 	public void removeWhitespace(CustomParser self) {
 		while (self.currentChar != '\0' && Character.isWhitespace(self.currentChar)) {
@@ -198,18 +245,18 @@ public class CustomParser {
 		return new Token(result, "STRING_LITERAL", self.currentLine);
 		//return "String Literal, symbol: \"" + result + "\", line #" + self.currentLine;
 	}
-	
+
 	//Function to remove the comments from input
 	public String removeComments(CustomParser self) {
 		String result = "";
 		//int start = self.position;
-		
+
 		//If it's not a comment then return
 		if (self.currentChar != '/') {
 			return "";
 		}
 		self.moveForward(self);
-		
+
 		//Remove single line comments
 		if(self.currentChar == '/') {
 			while (self.currentChar != '\0' && self.currentChar != '\n' ) {
@@ -237,10 +284,10 @@ public class CustomParser {
 			self.currentLine += 1;
 			//System.out.println("NewLine: " + self.currentLine);
 		}
-		
+
 		self.position += 1;
 		self.lastChar = self.currentChar;
-		
+
 		if (self.position >= (self.text.length())) {
 			self.currentChar = '\0';
 			self.nextChar = '\0';
@@ -286,7 +333,7 @@ public class CustomParser {
 		}
 		return new Token(value, "KEYWORD", this.currentLine);
 	}
-	
+
 	//Check if character is a special symbol
 
 	//TODO: Ask brett if we want to change this to String cuz of "==" or "!=" etc
