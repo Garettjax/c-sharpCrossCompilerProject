@@ -13,6 +13,10 @@ public class Main {
 	// create hash map
 
 	public static void main(String[] args) throws IOException {
+		boolean showTokens =true;
+		boolean showJavaCode =false;
+
+
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 		//System.out.println("Please provide a valid path to input.txt file: ");
@@ -35,9 +39,9 @@ public class Main {
 			CustomParser customParser = new CustomParser(text);
 			tokens = customParser.getAllTokens(customParser);
 			Iterator<Token> itr = tokens.iterator();
-			while(itr.hasNext()) {
+			while (itr.hasNext()) {
 				Token next = itr.next();
-				if(next.getRowNumber() == -1) {
+				if (next.getRowNumber() == -1) {
 					itr.remove();
 				}
 			}
@@ -47,29 +51,33 @@ public class Main {
 			//TODO: make it so it prints out "translated code" in Java
 			//Done
 			//NOTES: Didn't change anything in customParser
-
-			for (Token element : tokens) {
-				System.out.println("*************************************");
-				System.out.println(element.rowNum);
-				System.out.println(element.getLexeme());
-				System.out.println(element.getTokenType());
-				System.out.println("*************************************");
-				System.out.println();
-			}
+if(showTokens) {
+	for (Token element : tokens) {
+		System.out.println();
+		System.out.println("*************************************");
+		System.out.println(element.rowNum);
+		System.out.println(element.getLexeme());
+		System.out.println(element.getTokenType());
+		System.out.println("*************************************");
+		System.out.println();
+	}
+}
 //For translation
-		/*	int temp=0;
-			for (Token element1 : tokens) {
-				if(temp!= element1.rowNum){
+			if (showJavaCode){
+
+				int temp = 0;
+				for (Token element1 : tokens) {
+					if (temp != element1.rowNum) {
 					System.out.println();
 				}
-				if((!element1.getLexeme().equals("-"))&&(!element1.getLexeme().equals("+"))){
+				if ((!element1.getLexeme().equals("-")) && (!element1.getLexeme().equals("+"))) {
 					System.out.print(element1.getLexeme() + " ");
-				}
-				else{
+				} else {
 					System.out.print(element1.getLexeme() + element1.getLexeme());
 				}
-				temp= element1.rowNum;
-			}*/
+				temp = element1.rowNum;
+			}
+		}
 		}
 		catch (Exception e) {
 			bufferedReader.close();
