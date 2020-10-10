@@ -17,15 +17,15 @@ public class Main {
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
 
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				MyAssignment myAssignment = new MyAssignment();
-				myAssignment.setVisible(true);
-			}
-		});
+//		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				MyAssignment myAssignment = new MyAssignment();
+//				myAssignment.setVisible(true);
+//			}
+//		});
 
 
 		boolean showTokens =true;
@@ -52,8 +52,10 @@ public class Main {
 				text += line + '\n';
 			}
 			bufferedReader.close();
+			
 			CustomParser customParser = new CustomParser(text);
 			tokens = customParser.getAllTokens(customParser);
+			
 			Iterator<Token> itr = tokens.iterator();
 			while (itr.hasNext()) {
 				Token next = itr.next();
